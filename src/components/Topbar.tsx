@@ -9,7 +9,7 @@ export function Topbar({ onMenuToggle, menuOpen }: TopbarProps) {
   return (
     <header className="topbar">
       <div className="topbar-left">
-        <div className="topbar-logo">FAUSOL</div>
+        <img src="/fausol-logo.jpg" alt="Fausol" className="topbar-logo-img" />
         <div className="topbar-divider" />
         <span className="topbar-title">Mapa Estratégico</span>
       </div>
