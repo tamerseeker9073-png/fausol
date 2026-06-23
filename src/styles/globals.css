@@ -33,7 +33,7 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 54px;
+  height: 62px;
   padding: 0 24px;
   background: var(--panel);
   border-bottom: 1px solid var(--border);
@@ -54,11 +54,11 @@ html, body, #root {
 }
 
 .topbar-logo-img {
-  height: 32px;
+  height: 40px;
   width: auto;
   object-fit: contain;
   display: block;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 .topbar-divider {
@@ -99,7 +99,7 @@ html, body, #root {
   display: flex;
   flex: 1;
   overflow: hidden;
-  height: calc(100vh - 54px);
+  height: calc(100vh - 62px);
 }
 
 /* ── Sidebar ─────────────────────────────────────────── */
@@ -198,6 +198,8 @@ html, body, #root {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .sidebar-scroll::-webkit-scrollbar { width: 3px; }
@@ -242,11 +244,14 @@ html, body, #root {
 }
 
 .zone-prio {
-  font-size: 9px; font-weight: 700; font-family: var(--mono);
-  letter-spacing: 0.06em;
-  padding: 2px 5px; border-radius: 3px;
+  font-size: 10px; font-weight: 700; font-family: var(--mono);
+  letter-spacing: 0.04em;
+  padding: 3px 7px;
+  border-radius: 4px;
   border: 1px solid transparent;
   flex-shrink: 0;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .zone-arrow {
@@ -623,19 +628,20 @@ html, body, #root {
 /* ── Mobile ───────────────────────────────────────────── */
 @media (max-width: 767px) {
   /* Topbar compacto */
-  .topbar { height: 48px; padding: 0 14px; }
+  .topbar { height: 54px; padding: 0 14px; }
+  .topbar-logo-img { height: 34px; }
   .topbar-title { display: none; }
   .topbar-divider { display: none; }
   .topbar-stat .ts-label { display: none; }
   .menu-toggle { display: flex; }
 
   /* Body: mapa ocupa todo */
-  .app-body { height: calc(100vh - 48px); }
+  .app-body { height: calc(100vh - 54px); }
 
   /* Sidebar: overlay deslizable desde la derecha */
   .sidebar {
     position: fixed;
-    top: 48px; right: 0; bottom: 0;
+    top: 54px; right: 0; bottom: 0;
     z-index: 1000;
     width: min(320px, 90vw);
     transform: translateX(100%);
