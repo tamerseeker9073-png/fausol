@@ -121,17 +121,16 @@ export function MapView() {
         })
 
         const pName = loc.provincia === 'La Roja' ? 'La Rioja' : loc.provincia
-        marker.bindTooltip(
-          `<div class="map-tooltip">
-            <div class="tt-city">${emoji} ${loc.nombre}</div>
-            <div class="tt-province-small">${pName}</div>
-            <div class="tt-product" style="color:${color}">${product?.nombre ?? ''}</div>
-            <div class="tt-meta">
-              <span class="tt-priority tt-${prov}">${prov.toUpperCase()}</span>
-              <span class="tt-budget">${zone.presupuesto}%</span>
+        marker.bindPopup(
+          `<div class="map-popup-inner">
+            <div class="mp-city">${emoji} ${loc.nombre}</div>
+            <div class="mp-province">${pName}</div>
+            <div class="mp-product" style="color:${color}">
+              <span class="mp-dot" style="background:${color}"></span>${product?.nombre ?? ''}
             </div>
+            <div class="mp-badge mp-badge-${prov}">${prov.toUpperCase()}</div>
           </div>`,
-          { permanent: false, direction: 'top', className: 'leaflet-tooltip-custom', offset: [0, -8] }
+          { autoPan: false, closeButton: false, className: 'map-popup', offset: [0, -6], maxWidth: 220 }
         )
 
         marker.on('click', () => {
