@@ -60,14 +60,17 @@ export function MapView() {
   // Init map once
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return
+    const ARG_BOUNDS = L.latLngBounds(L.latLng(-55.5, -74.0), L.latLng(-21.0, -53.0))
     const map = L.map(containerRef.current, {
       center: [-38.5, -63.5],
       zoom: 4,
-      minZoom: 3,
+      minZoom: 4,
       maxZoom: 14,
       zoomControl: false,
       attributionControl: false,
       preferCanvas: true,
+      maxBounds: ARG_BOUNDS.pad(0.08),
+      maxBoundsViscosity: 1.0,
     })
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       subdomains: 'abcd',

@@ -9,7 +9,9 @@ const PRIORITY_CONFIG: Record<Priority, { label: string; color: string }> = {
   baja: { label: 'Baja', color: '#6b7280' },
 }
 
-export function Sidebar() {
+interface SidebarProps { open?: boolean; onClose?: () => void }
+
+export function Sidebar({ open, onClose: _onClose }: SidebarProps) {
   const {
     zones, selectedZoneId, activeProducts, activePriorities,
     selectZone, toggleProduct, togglePriority, openModal, deleteZone, reset,
@@ -30,7 +32,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar${open ? ' sidebar-open' : ''}`}>
       {/* ── New zone button ── */}
       <div className="sidebar-section">
         <button className="btn-new-zone" onClick={() => openModal()}>
