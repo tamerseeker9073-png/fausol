@@ -97,19 +97,24 @@ export function MapView() {
         const marker = L.marker([loc.lat, loc.lng], { icon: makeIcon(zone, isSelected) })
 
         const pName = loc.provincia === 'La Roja' ? 'La Rioja' : loc.provincia
-        marker.bindPopup(
-          `<div class="map-popup-inner">
+        const popupContent = `
+          <div class="map-popup-inner">
             <div class="mp-city">${emoji} ${loc.nombre}</div>
             <div class="mp-province">${pName}</div>
             <div class="mp-product" style="color:${color}">
               <span class="mp-dot" style="background:${color}"></span>${product?.nombre ?? ''}
             </div>
-            <div class="mp-badge mp-badge-${prov}">${prov.toUpperCase()}</div>
-          </div>`,
-          { autoPan: false, closeButton: false, className: 'map-popup', offset: [0, -6], maxWidth: 220 }
-        )
+            <div class="mp-badge mp-badge-${prov}">${prov === 'alta' ? 'Alta prioridad' : prov === 'media' ? 'Media prioridad' : 'Baja prioridad'}</div>
+          </div>`
 
         marker.on('click', () => {
+          const map = mapRef.current
+          if (map) {
+            L.popup({ autoPan: false, closeButton: false, className: 'map-popup', offset: [0, -10] })
+              .setLatLng([loc.lat, loc.lng])
+              .setContent(popupContent)
+              .openOn(map)
+          }
           useMapStore.getState().selectZone(
             useMapStore.getState().selectedZoneId === zone.id ? null : zone.id
           )
